@@ -19222,104 +19222,105 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
     // })
     // console.log(series)
 
-    return {
-      series: series
+    return {// series,
+      // onMounted,
     }; // end return
 
     function onMounted() {
-      var seriesTemp = [];
-      var number = this.series.value.data.length;
-
-      for (var i = 0; i < number; i++) {
-        seriesTemp.push({
-          name: this.series.value.data[i].label,
-          data: this.series.value.data[i].values,
-          color: this.series.value.data[i].color
-        });
-      }
-
-      alert(seriesTemp); // console.log(seriesTemp);
-
-      highcharts__WEBPACK_IMPORTED_MODULE_0___default().chart(this.$el, {
-        chart: {
-          type: 'column' // events: {
-          //     load: this.drawDataTable()
-          // },
-          // borderWidth: 2,
-          // width: 600,
-          // height: 600
-
-        },
-        title: {
-          text: this.series.value.title
-        },
-        subtitle: {
-          text: this.series.value.subtitle
-        },
-        xAxis: {
-          title: {
-            text: this.series.value.x_axis
-          },
-          categories: this.series.value.categories
-        },
-        yAxis: {
-          min: 0,
-          title: {
-            text: this.series.y_axis
-          },
-          stackLabels: {
-            enabled: true,
-            style: {
-              fontWeight: 'bold',
-              color: 'gray' //   color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-
-            }
-          }
-        },
-        // legend: {
-        //     align: 'right',
-        //     x: -70,
-        //     verticalAlign: 'top',
-        //     y: 20,
-        //     floating: true,
-        //     backgroundColor: 'white',
-        //   //   backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-        //     borderColor: '#CCC',
-        //     borderWidth: 1,
-        //     shadow: false
-        // },
-        tooltip: {
-          formatter: function formatter() {
-            return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
-          }
-        },
-        plotOptions: {
-          column: {
-            stacking: 'normal',
-            dataLabels: {
-              enabled: true,
-              formatter: function formatter() {
-                return Math.round(100 * this.y / this.total) + '%';
-              },
-              color: 'white',
-              //   color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-              style: {
-                textShadow: '0 0 3px black, 0 0 3px black'
-              }
-            }
-          }
-        },
-        series: seriesTemp,
-        legend: {
-          enabled: true,
-          layout: 'horizontal',
-          align: 'center',
-          verticalAlign: 'top'
-        },
-        credits: {
-          enabled: false
-        }
-      }); //end chart
+      // const seriesTemp = [];
+      // const number = this.series.value.data.length
+      console.log('inside onMounted function...'); // console.log(number)
+      // for(let i=0; i<number; i++){
+      //     seriesTemp.push({
+      //         name: this.series.value.data[i].label,
+      //         data: this.series.value.data[i].values,
+      //         color: this.series.value.data[i].color
+      //     });
+      // }
+      // alert(seriesTemp);
+      // console.log(seriesTemp);
+      //     Highcharts.chart(this.$el, {
+      //         chart: {
+      //         type: 'column',
+      //     // events: {
+      //     //     load: this.drawDataTable()
+      //     // },
+      // // borderWidth: 2,
+      // // width: 600,
+      // // height: 600
+      //     },
+      //     title: {
+      //         text: this.series.value.title
+      //     },
+      //     subtitle: {
+      //         text: this.series.value.subtitle
+      //     },
+      //     xAxis: {
+      //         title: {
+      //             text: this.series.value.x_axis
+      //         },
+      //         categories: this.series.value.categories
+      //     },
+      //     yAxis: {
+      //         min: 0,
+      //         title: {
+      //             text: this.series.y_axis
+      //         },
+      //         stackLabels: {
+      //             enabled: true,
+      //             style: {
+      //                 fontWeight: 'bold',
+      //                 color: 'gray'
+      //                 //   color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+      //             }
+      //         }
+      //     },
+      //     // legend: {
+      //     //     align: 'right',
+      //     //     x: -70,
+      //     //     verticalAlign: 'top',
+      //     //     y: 20,
+      //     //     floating: true,
+      //     //     backgroundColor: 'white',
+      //     //   //   backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+      //     //     borderColor: '#CCC',
+      //     //     borderWidth: 1,
+      //     //     shadow: false
+      //     // },
+      //     tooltip: {
+      //         formatter: function() {
+      //             return '<b>'+ this.x +'</b><br/>'+
+      //                 this.series.name +': '+ this.y +'<br/>'+
+      //                 'Total: '+ this.point.stackTotal;
+      //         }
+      //     },
+      //     plotOptions: {
+      //         column: {
+      //             stacking: 'normal',
+      //             dataLabels: {
+      //                 enabled: true,
+      //                 formatter: function () {
+      //                     return Math.round(100 * this.y / this.total) + '%';
+      //                 },
+      //                 color: 'white',
+      //                 //   color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+      //                 style: {
+      //                     textShadow: '0 0 3px black, 0 0 3px black'
+      //                 }
+      //             }
+      //         }
+      //     },
+      //     series: seriesTemp,
+      //     legend: {
+      //             enabled: true,
+      //             layout: 'horizontal',
+      //             align: 'center',
+      //             verticalAlign: 'top',
+      //         },
+      //     credits: {
+      //         enabled: false
+      //         },
+      //     }); //end chart
     } // end onMounted()
 
   } // end setup()
@@ -19381,13 +19382,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  id: "container"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-    id: "container",
-    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)(_ctx.styleObject)
-  }, null, 4
-  /* STYLE */
-  );
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1);
 }
 
 /***/ }),
