@@ -1,11 +1,12 @@
 <template>
     <h1>{{ greeting }}</h1>
+    <div>Foo = {{ foo }}</div>
 </template>
 <script>
 import { ref } from 'vue'
 
 export default {
-    props: ['greeting'],
+    props: ['foo'],
 
     
     setup(props) {
