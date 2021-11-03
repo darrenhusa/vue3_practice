@@ -12,7 +12,7 @@
 
     <div id="app">
 
-        <hello-world></hello-world>
+        <hello-world greeting="Take me to your leader!"></hello-world>
 
         @php
     
