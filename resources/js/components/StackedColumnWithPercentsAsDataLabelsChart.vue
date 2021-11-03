@@ -10,147 +10,158 @@ Exporting(Highcharts);
 import { onMounted, ref } from 'vue'
 
 export default {
-    name : "StackedColumnChartWithDataLabelPercents",
+    // name : "StackedColumnChartWithDataLabelPercents",
     props : {
       series : {
         // type: Array,
         type: Object,
         required: true
       },
-      chartWidth: {
-        type: Number,
-        default: 300
-      },
-      chartHeight: {
-        type: Number,
-        default: 300
-      }
+    //   chartWidth: {
+    //     type: Number,
+    //     default: 300
+    //   },
+    //   chartHeight: {
+    //     type: Number,
+    //     default: 300
+    //   }
     // showDataTable : {
     //     type: Boolean,
     //     default: false
     //   },
 	}, // end props
 
-    setup() {
+    setup(props) {
         const series = ref({})
+        // const chartHeight = ref(300)
+        // const chartWidth = ref(300)
 
-        onMounted( () => {
+        // const styleObject = ref ({
+        //   width: chartWidth + 'px',
+        //   height: chartHeight + 'px',
+        //   border: '1px solid gray',
+        // })
+
+        // console.log(series)
+
+        return {
+            series,
+        } // end return
+
+        function onMounted() {
             const seriesTemp = [];
-        const number = this.series.data.length
+            const number = this.series.value.data.length
 
-      for(let i=0; i<number; i++){
-        seriesTemp.push({
-            name: this.series.data[i].label,
-            data: this.series.data[i].values,
-            color: this.series.data[i].color
-        });
-      }
+            for(let i=0; i<number; i++){
+                seriesTemp.push({
+                    name: this.series.value.data[i].label,
+                    data: this.series.value.data[i].values,
+                    color: this.series.value.data[i].color
+                });
+            }
 
-      // alert(seriesTemp);
-      // console.log(seriesTemp);
+            alert(seriesTemp);
+            // console.log(seriesTemp);
 
-      this.target = Highcharts.chart(this.$el, {
-      chart: {
-          type: 'column',
+            Highcharts.chart(this.$el, {
+                chart: {
+                type: 'column',
             // events: {
             //     load: this.drawDataTable()
             // },
         // borderWidth: 2,
         // width: 600,
         // height: 600
-      },
-      title: {
-          text: this.series.title
-      },
-      subtitle: {
-          text: this.series.subtitle
-      },
-      xAxis: {
-        title: {
-              text: this.series.x_axis
-          },
-          categories: this.series.categories
-      },
-      yAxis: {
-          min: 0,
-          title: {
-              text: this.series.y_axis
-          },
-          stackLabels: {
-              enabled: true,
-              style: {
-                  fontWeight: 'bold',
-                  color: 'gray'
-                //   color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-              }
-          }
-      },
-      // legend: {
-      //     align: 'right',
-      //     x: -70,
-      //     verticalAlign: 'top',
-      //     y: 20,
-      //     floating: true,
-      //     backgroundColor: 'white',
-      //   //   backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-      //     borderColor: '#CCC',
-      //     borderWidth: 1,
-      //     shadow: false
-      // },
-      tooltip: {
-          formatter: function() {
-              return '<b>'+ this.x +'</b><br/>'+
-                  this.series.name +': '+ this.y +'<br/>'+
-                  'Total: '+ this.point.stackTotal;
-          }
-      },
-      plotOptions: {
-          column: {
-              stacking: 'normal',
-              dataLabels: {
-                  enabled: true,
-                  formatter: function () {
-                      return Math.round(100 * this.y / this.total) + '%';
-                  },
-                  color: 'white',
-                //   color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                  style: {
-                      textShadow: '0 0 3px black, 0 0 3px black'
-                  }
-              }
-          }
-      },
-      series: seriesTemp,
+            },
+            title: {
+                text: this.series.value.title
+            },
+            subtitle: {
+                text: this.series.value.subtitle
+            },
+            xAxis: {
+                title: {
+                    text: this.series.value.x_axis
+                },
+                categories: this.series.value.categories
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: this.series.y_axis
+                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: 'gray'
+                        //   color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                    }
+                }
+            },
+            // legend: {
+            //     align: 'right',
+            //     x: -70,
+            //     verticalAlign: 'top',
+            //     y: 20,
+            //     floating: true,
+            //     backgroundColor: 'white',
+            //   //   backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            //     borderColor: '#CCC',
+            //     borderWidth: 1,
+            //     shadow: false
+            // },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.x +'</b><br/>'+
+                        this.series.name +': '+ this.y +'<br/>'+
+                        'Total: '+ this.point.stackTotal;
+                }
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return Math.round(100 * this.y / this.total) + '%';
+                        },
+                        color: 'white',
+                        //   color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                        style: {
+                            textShadow: '0 0 3px black, 0 0 3px black'
+                        }
+                    }
+                }
+            },
+            series: seriesTemp,
 
-      legend: {
-            enabled: true,
-            layout: 'horizontal',
-            align: 'center',
-            verticalAlign: 'top',
-        },
+            legend: {
+                    enabled: true,
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'top',
+                },
 
-      credits: {
-        enabled: false
-      },
-    });
-        })
-        },
+            credits: {
+                enabled: false
+                },
+            }); //end chart
+        } // end onMounted()
     
-        return {
-            series,
-        },
+    }, // end setup()
 
-  	data : function() {
-      return {
-        // target: 'container'
-        target: undefined,
-        styleObject: {
-          width: this.chartWidth + 'px',
-          height: this.chartHeight + 'px',
-          border: '1px solid gray',
-        },
-      }
-    },
+  	// data : function() {
+    //   return {
+    //     // target: 'container'
+    //     // target: undefined,
+    //     styleObject: {
+    //       width: this.chartWidth + 'px',
+    //       height: this.chartHeight + 'px',
+    //       border: '1px solid gray',
+    //     },
+    //   }
+    // },
 
     // mounted : function() {
 

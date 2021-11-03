@@ -20,6 +20,7 @@
              ['label' => 'Athlete', 'color' => '#217ca3', 'values' => [16, 271, 268, 258, 211]],
              ['label' => 'NonAthlete', 'color' => '#8d230f', 'values' => [748, 640, 883, 1394, 374]]
     ];
+    /* 
     $length3 = count($data3);
     $total3 = [];
     for ($i = 0; $i < 5; $i++)
@@ -28,7 +29,9 @@
     }
     $labels3 = ['Total', $data3[0]['label'], $data3[1]['label']];
     $numbers3 = [$total3, $data3[0]['values'], $data3[1]['values']];
-   $series3 = [
+   */
+   
+    $series3 = [
         'title' => 'Number of Applications - TRAD Programs',
         'categories' => ['Fall 2017', 'Fall 2018', 'Fall 2019', 'Fall 2020', 'Fall 2021'],
         'data' => $data3,
@@ -36,9 +39,7 @@
     @endphp
         <h2>Figure 3 - TRAD Applications by Athletic Status</h2>
         <stacked-column-with-data-label-percents
-            :series='@json($series3)'
-            :chart-width="1200"
-            :chart-height="400">
+            :series='@json($series3)'>
         ></stacked-column-with-data-label-percents>
     </div>
 
