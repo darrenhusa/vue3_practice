@@ -19166,8 +19166,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['foo'],
   setup: function setup(props) {
     // greeting: 'Hello World from Vue 3!'
-    var greeting = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('Hello World from Vue 3!');
-    console.log('inside HelloWorld setup()....'); // console.log(greeting.value)
+    var greeting = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('Hello World from Vue 3!'); // console.log('inside HelloWorld setup()....')
+    // console.log(greeting.value)
     // console.log(props.greeting)
     // greeting = props
 
@@ -19224,12 +19224,12 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
       height: props.chartHeight + 'px',
       border: '1px solid gray'
     }); // console.log(series)
+    // console.log(props.chartWidth)
 
-    console.log(props.chartWidth);
     (0,vue__WEBPACK_IMPORTED_MODULE_2__.onMounted)(function () {
       var seriesTemp = [];
-      var number = props.series.data.length;
-      console.log('inside onMounted function...'); // console.log(props.series)
+      var number = props.series.data.length; // console.log('inside onMounted function...')
+      // console.log(props.series)
       // console.log(number)
 
       for (var i = 0; i < number; i++) {
@@ -19238,9 +19238,9 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
           data: props.series.data[i].values,
           color: props.series.data[i].color
         });
-      }
+      } // console.log(seriesTemp)
 
-      console.log(seriesTemp);
+
       var chartOptions = {
         chart: {
           type: 'column'
@@ -19363,7 +19363,7 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
     // series : {
     //   // type: Array,
     //   type: Object,
-    //   required: true
+    //   // required: true
     // },
     chartWidth: {
       type: Number,
@@ -19381,39 +19381,81 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
       width: props.chartWidth + 'px',
       height: props.chartHeight + 'px',
       border: '1px solid gray'
-    }); // console.log(series)
-    // console.log(props.chartWidth)
-
-    console.log(props.url);
-    axios.get(props.url).then(function (response) {
-      console.log('outputing response values...'); // console.log(response);
-
-      console.log(response.data);
-      console.log(response.data['data']['length']);
-      console.log('---');
-      console.log(response.data['title']);
-      console.log(response.data['categories']);
-      console.log(response.data['data'][0].label);
-      console.log(response.data['data'][0].color);
-      console.log(response.data['data'][0].values);
-      var series = response.data;
-      var number = response.data['data']['length'];
-
-      for (var i = 0; i < number; i++) {
-        series.push({
-          name: response.data['data'][i].label,
-          data: response.data['data'][i].values,
-          color: response.data['data'][i].color // name: props.series.data[i].label,
-          // data: props.series.data[i].values,
-          // color: props.series.data[i].color
-
-        });
-      }
     });
+    console.log('inside setup...');
+    var seriesTemp = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
+    var results = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(); // console.log(series)
+    // console.log(props.chartWidth)
+    // console.log(props.url)
+    // let seriesTemp;
+    // axios.get(props.url)
+    //    .then(response => {
+    //      console.log('inside axios then')
+    //      console.log(response.data)
+    //      console.log(response.data.categories)
+    //      console.log(response.data.title)
+    //      seriesTemp = response.data
+    //    })
+    // console.log('try to output seriesTemp')
+    // console.log(seriesTemp)
+    // axios.get(props.url)
+    //   .then((response) => {
+    //   console.log('outputing response values...')
+    //   // console.log(response);
+    //   console.log(response.data);
+    //   console.log(response.data['data']['length']);
+    //   console.log('---');
+    //   console.log(response.data['title']);
+    //   console.log(response.data['categories']);
+    //   console.log(response.data['data'][0].label);
+    //   console.log(response.data['data'][0].color);
+    //   console.log(response.data['data'][0].values);
+    //   const series = response.data;
+    //   const number = response.data['data']['length']
+    //   for(let i=0; i<number; i++){
+    //     series.push({
+    //         name: response.data['data'][i].label,
+    //         data: response.data['data'][i].values,
+    //         color: response.data['data'][i].color,
+    // name: props.series.data[i].label,
+    // data: props.series.data[i].values,
+    // color: props.series.data[i].color
+    // });
+    // }
+    // });
+
     (0,vue__WEBPACK_IMPORTED_MODULE_2__.onMounted)(function () {
       // const seriesTemp = [];
       // const number = props.series.data.length
-      console.log('inside onMounted function...'); // console.log(props.series)
+      console.log('inside onMounted()...');
+      axios.get(props.url).then(function (response) {
+        results = response.data; //  console.log('inside axios then')
+        //  console.log(response.data)
+        //  console.log(response.data.categories)
+        //  console.log(response.data.title)
+        //  console.log(response.data.data)
+        //  console.log(response.data.data[0].label)
+        //  console.log(response.data.data[0].values)
+        //  console.log(response.data.data[0].color)
+
+        var number = results.data.length; // let seriesTemp = []
+        //  seriesTemp = response.data
+
+        for (var i = 0; i < number; i++) {
+          seriesTemp.push({
+            name: response.data.data[i].label,
+            data: response.data.data[i].values,
+            color: response.data.data[i].color // name: props.series.data[i].label,
+            // data: props.series.data[i].values,
+            // color: props.series.data[i].color
+
+          }); // end push
+        } // end for
+
+      }); //end axios
+      // console.log(seriesTemp)
+      // console.log(seriesTemp.length)
+      // console.log(props.series)
       // console.log(number)
       // for(let i=0; i<number; i++){
       //   seriesTemp.push({
@@ -19422,28 +19464,28 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
       //       color: props.series.data[i].color
       //   });
       // }
+      // console.log(seriesTemp)
 
-      console.log(series);
       var chartOptions = {
         chart: {
           type: 'column'
         },
         title: {
-          text: props.series.title
+          text: response.data.title
         },
         subtitle: {
-          text: props.series.subtitle
+          text: response.data.subtitle
         },
         xAxis: {
           title: {
-            text: props.series.x_axis
+            text: response.data.x_axis
           },
-          categories: props.series.categories
+          categories: response.data.categories
         },
         yAxis: {
           min: 0,
           title: {
-            text: props.series.y_axis
+            text: response.data.y_axis
           },
           stackLabels: {
             enabled: true,
@@ -19504,7 +19546,9 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
 
     return {
       el: el,
-      styleObject: styleObject
+      styleObject: styleObject,
+      seriesTemp: seriesTemp,
+      results: results
     }; // end return
   } // end setup()  
   // see https://stackoverflow.com/questions/50144557/how-to-add-data-to-chart-js-with-a-for-loop/50144700

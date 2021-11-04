@@ -19,7 +19,7 @@ export default {
       // series : {
       //   // type: Array,
       //   type: Object,
-      //   required: true
+      //   // required: true
       // },
       chartWidth: {
         type: Number,
@@ -39,46 +39,100 @@ export default {
           height: props.chartHeight + 'px',
           border: '1px solid gray',
         })
+        
+        console.log('inside setup...')
+
+        let seriesTemp = ref([])
+        let results = ref()
 
         // console.log(series)
         // console.log(props.chartWidth)
 
-      console.log(props.url)
+      // console.log(props.url)
 
-      axios.get(props.url)
-        .then((response) => {
-        console.log('outputing response values...')
-        // console.log(response);
-        console.log(response.data);
-        console.log(response.data['data']['length']);
-        console.log('---');
-        console.log(response.data['title']);
-        console.log(response.data['categories']);
-        console.log(response.data['data'][0].label);
-        console.log(response.data['data'][0].color);
-        console.log(response.data['data'][0].values);
+      // let seriesTemp;
 
-        const series = response.data;
-        const number = response.data['data']['length']
+      // axios.get(props.url)
+      //    .then(response => {
+      //      console.log('inside axios then')
+      //      console.log(response.data)
+      //      console.log(response.data.categories)
+      //      console.log(response.data.title)
+      //      seriesTemp = response.data
+      //    })
 
-        for(let i=0; i<number; i++){
-          series.push({
-              name: response.data['data'][i].label,
-              data: response.data['data'][i].values,
-              color: response.data['data'][i].color,
+    // console.log('try to output seriesTemp')
+    // console.log(seriesTemp)
+
+      // axios.get(props.url)
+      //   .then((response) => {
+      //   console.log('outputing response values...')
+      //   // console.log(response);
+      //   console.log(response.data);
+      //   console.log(response.data['data']['length']);
+      //   console.log('---');
+      //   console.log(response.data['title']);
+      //   console.log(response.data['categories']);
+      //   console.log(response.data['data'][0].label);
+      //   console.log(response.data['data'][0].color);
+      //   console.log(response.data['data'][0].values);
+
+      //   const series = response.data;
+      //   const number = response.data['data']['length']
+
+      //   for(let i=0; i<number; i++){
+      //     series.push({
+      //         name: response.data['data'][i].label,
+      //         data: response.data['data'][i].values,
+      //         color: response.data['data'][i].color,
 
               // name: props.series.data[i].label,
               // data: props.series.data[i].values,
               // color: props.series.data[i].color
-          });
-        }
-      });
+          // });
+        // }
+      // });
         
       onMounted(() => {
         // const seriesTemp = [];
         // const number = props.series.data.length
 
-        console.log('inside onMounted function...')
+        console.log('inside onMounted()...')
+
+        axios.get(props.url)
+         .then(response => {
+           results = response.data
+          //  console.log('inside axios then')
+          //  console.log(response.data)
+          //  console.log(response.data.categories)
+          //  console.log(response.data.title)
+          //  console.log(response.data.data)
+          //  console.log(response.data.data[0].label)
+            //  console.log(response.data.data[0].values)
+          //  console.log(response.data.data[0].color)
+          const number = results.data.length
+          
+          // let seriesTemp = []
+          //  seriesTemp = response.data
+        
+        for(let i=0; i<number; i++){
+          seriesTemp.push({
+              name: response.data.data[i].label,
+              data: response.data.data[i].values,
+              color: response.data.data[i].color
+              
+              // name: props.series.data[i].label,
+              // data: props.series.data[i].values,
+              // color: props.series.data[i].color
+          }); // end push
+        } // end for
+        
+        
+        }) //end axios
+
+        // console.log(seriesTemp)
+
+        // console.log(seriesTemp.length)
         // console.log(props.series)
         // console.log(number)
       
@@ -89,28 +143,28 @@ export default {
         //       color: props.series.data[i].color
         //   });
         // }
-        console.log(series)
+        // console.log(seriesTemp)
 
         const chartOptions = {
           chart: {
             type: 'column',
           },
           title: {
-              text: props.series.title
+              text: response.data.title
           },
-          subtitle: {
-              text: props.series.subtitle
+          subtitle: {                                                                                                                                                                                                                                                                 
+              text: response.data.subtitle
           },
           xAxis: {
             title: {
-                text: props.series.x_axis
+                text: response.data.x_axis
             },
-            categories: props.series.categories
+            categories: response.data.categories
           },
           yAxis: {
             min: 0,
             title: {
-                text: props.series.y_axis
+                text: response.data.y_axis
             },
             stackLabels: {
               enabled: true,
@@ -177,6 +231,8 @@ export default {
       return {
             el,
             styleObject,
+            seriesTemp,
+            results,
       } // end return
 
     }, // end setup()  

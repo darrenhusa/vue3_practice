@@ -37,13 +37,13 @@ export default {
         })
 
         // console.log(series)
-        console.log(props.chartWidth)
+        // console.log(props.chartWidth)
 
       onMounted(() => {
         const seriesTemp = [];
         const number = props.series.data.length
 
-        console.log('inside onMounted function...')
+        // console.log('inside onMounted function...')
         // console.log(props.series)
         // console.log(number)
       
@@ -54,7 +54,7 @@ export default {
               color: props.series.data[i].color
           });
         }
-        console.log(seriesTemp)
+        // console.log(seriesTemp)
 
         const chartOptions = {
           chart: {
