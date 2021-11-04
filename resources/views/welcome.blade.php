@@ -39,7 +39,9 @@
     @endphp
         <h2>Figure 3 - TRAD Applications by Athletic Status</h2>
         <stacked-column-with-data-label-percents
-            :series='@json($series3)'>
+            :series='@json($series3)'
+            :chart-width="1200"
+            :chart-height="400">
         ></stacked-column-with-data-label-percents>
     </div>
 

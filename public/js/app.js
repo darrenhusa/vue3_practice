@@ -19206,32 +19206,26 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
       // type: Array,
       type: Object,
       required: true
-    } //   chartWidth: {
-    //     type: Number,
-    //     default: 300
-    //   },
-    //   chartHeight: {
-    //     type: Number,
-    //     default: 300
-    //   }
-    // showDataTable : {
-    //     type: Boolean,
-    //     default: false
-    //   },
-
+    },
+    chartWidth: {
+      type: Number,
+      "default": 300
+    },
+    chartHeight: {
+      type: Number,
+      "default": 300
+    }
   },
   // end props
   setup: function setup(props) {
-    var el = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(null); // const series = ref({})
-    // const chartHeight = ref(300)
-    // const chartWidth = ref(300)
-    // const styleObject = ref ({
-    //   width: chartWidth + 'px',
-    //   height: chartHeight + 'px',
-    //   border: '1px solid gray',
-    // })
-    // console.log(series)
+    var el = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(null);
+    var styleObject = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)({
+      width: props.chartWidth + 'px',
+      height: props.chartHeight + 'px',
+      border: '1px solid gray'
+    }); // console.log(series)
 
+    console.log(props.chartWidth);
     (0,vue__WEBPACK_IMPORTED_MODULE_2__.onMounted)(function () {
       var seriesTemp = [];
       var number = props.series.data.length;
@@ -19326,25 +19320,11 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
     }); // end onMounted()
 
     return {
-      el: el
+      el: el,
+      styleObject: styleObject
     }; // end return
-  } // end setup()
-  // data : function() {
-  //   return {
-  //     // target: 'container'
-  //     // target: undefined,
-  //     styleObject: {
-  //       width: this.chartWidth + 'px',
-  //       height: this.chartHeight + 'px',
-  //       border: '1px solid gray',
-  //     },
-  //   }
-  // },
-  // mounted : function() {
-  // console.log(this.series);
-  // console.log(this.series.title);
+  } // end setup()  
   // see https://stackoverflow.com/questions/50144557/how-to-add-data-to-chart-js-with-a-for-loop/50144700
-  //   } // end mounted()
   //   beforeDestroy: function() {
   //     this.target.destroy();
   //   },
@@ -19391,12 +19371,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  ref: "el"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, null, 512
-  /* NEED_PATCH */
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    ref: "el",
+    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($setup.styleObject)
+  }, null, 4
+  /* STYLE */
   );
 }
 
