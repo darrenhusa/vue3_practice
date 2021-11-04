@@ -19167,7 +19167,7 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(props) {
     // greeting: 'Hello World from Vue 3!'
     var greeting = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('Hello World from Vue 3!');
-    console.log('inside setup()....'); // console.log(greeting.value)
+    console.log('inside HelloWorld setup()....'); // console.log(greeting.value)
     // console.log(props.greeting)
     // greeting = props
 
@@ -19200,7 +19200,7 @@ __webpack_require__.r(__webpack_exports__);
 highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts__WEBPACK_IMPORTED_MODULE_0___default()));
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  // name : "StackedColumnChartWithDataLabelPercents",
+  name: "StackedColumnChartWithDataLabelPercents",
   props: {
     series: {
       // type: Array,
@@ -19222,7 +19222,8 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
   },
   // end props
   setup: function setup(props) {
-    var series = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)({}); // const chartHeight = ref(300)
+    var el = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(null); // const series = ref({})
+    // const chartHeight = ref(300)
     // const chartWidth = ref(300)
     // const styleObject = ref ({
     //   width: chartWidth + 'px',
@@ -19231,107 +19232,102 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
     // })
     // console.log(series)
 
-    return {// series,
-      // onMounted,
+    (0,vue__WEBPACK_IMPORTED_MODULE_2__.onMounted)(function () {
+      var seriesTemp = [];
+      var number = props.series.data.length;
+      console.log('inside onMounted function...'); // console.log(props.series)
+      // console.log(number)
+
+      for (var i = 0; i < number; i++) {
+        seriesTemp.push({
+          name: props.series.data[i].label,
+          data: props.series.data[i].values,
+          color: props.series.data[i].color
+        });
+      }
+
+      console.log(seriesTemp);
+      var chartOptions = {
+        chart: {
+          type: 'column'
+        },
+        title: {
+          text: props.series.title
+        },
+        subtitle: {
+          text: props.series.subtitle
+        },
+        xAxis: {
+          title: {
+            text: props.series.x_axis
+          },
+          categories: props.series.categories
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: props.series.y_axis
+          },
+          stackLabels: {
+            enabled: true,
+            style: {
+              fontWeight: 'bold',
+              color: 'gray' //   color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+
+            }
+          }
+        },
+        // legend: {
+        //     align: 'right',
+        //     x: -70,
+        //     verticalAlign: 'top',
+        //     y: 20,
+        //     floating: true,
+        //     backgroundColor: 'white',
+        //   //   backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        //     borderColor: '#CCC',
+        //     borderWidth: 1,
+        //     shadow: false
+        // },
+        tooltip: {
+          formatter: function formatter() {
+            return '<b>' + props.x + '</b><br/>' + props.series.name + ': ' + props.y + '<br/>' + 'Total: ' + props.point.stackTotal;
+          }
+        },
+        plotOptions: {
+          column: {
+            stacking: 'normal',
+            dataLabels: {
+              enabled: true,
+              formatter: function formatter() {
+                return Math.round(100 * props.y / props.total) + '%';
+              },
+              color: 'white',
+              //   color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+              style: {
+                textShadow: '0 0 3px black, 0 0 3px black'
+              }
+            }
+          }
+        },
+        series: seriesTemp,
+        legend: {
+          enabled: true,
+          layout: 'horizontal',
+          align: 'center',
+          verticalAlign: 'top'
+        },
+        credits: {
+          enabled: false
+        }
+      }; // end chartOptions
+
+      highcharts__WEBPACK_IMPORTED_MODULE_0___default().chart(el.value, chartOptions); //end chart
+    }); // end onMounted()
+
+    return {
+      el: el
     }; // end return
-
-    function onMounted() {
-      // const seriesTemp = [];
-      // const number = this.series.value.data.length
-      console.log('inside onMounted function...'); // console.log(number)
-      // for(let i=0; i<number; i++){
-      //     seriesTemp.push({
-      //         name: this.series.value.data[i].label,
-      //         data: this.series.value.data[i].values,
-      //         color: this.series.value.data[i].color
-      //     });
-      // }
-      // alert(seriesTemp);
-      // console.log(seriesTemp);
-      //     Highcharts.chart(this.$el, {
-      //         chart: {
-      //         type: 'column',
-      //     // events: {
-      //     //     load: this.drawDataTable()
-      //     // },
-      // // borderWidth: 2,
-      // // width: 600,
-      // // height: 600
-      //     },
-      //     title: {
-      //         text: this.series.value.title
-      //     },
-      //     subtitle: {
-      //         text: this.series.value.subtitle
-      //     },
-      //     xAxis: {
-      //         title: {
-      //             text: this.series.value.x_axis
-      //         },
-      //         categories: this.series.value.categories
-      //     },
-      //     yAxis: {
-      //         min: 0,
-      //         title: {
-      //             text: this.series.y_axis
-      //         },
-      //         stackLabels: {
-      //             enabled: true,
-      //             style: {
-      //                 fontWeight: 'bold',
-      //                 color: 'gray'
-      //                 //   color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-      //             }
-      //         }
-      //     },
-      //     // legend: {
-      //     //     align: 'right',
-      //     //     x: -70,
-      //     //     verticalAlign: 'top',
-      //     //     y: 20,
-      //     //     floating: true,
-      //     //     backgroundColor: 'white',
-      //     //   //   backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-      //     //     borderColor: '#CCC',
-      //     //     borderWidth: 1,
-      //     //     shadow: false
-      //     // },
-      //     tooltip: {
-      //         formatter: function() {
-      //             return '<b>'+ this.x +'</b><br/>'+
-      //                 this.series.name +': '+ this.y +'<br/>'+
-      //                 'Total: '+ this.point.stackTotal;
-      //         }
-      //     },
-      //     plotOptions: {
-      //         column: {
-      //             stacking: 'normal',
-      //             dataLabels: {
-      //                 enabled: true,
-      //                 formatter: function () {
-      //                     return Math.round(100 * this.y / this.total) + '%';
-      //                 },
-      //                 color: 'white',
-      //                 //   color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-      //                 style: {
-      //                     textShadow: '0 0 3px black, 0 0 3px black'
-      //                 }
-      //             }
-      //         }
-      //     },
-      //     series: seriesTemp,
-      //     legend: {
-      //             enabled: true,
-      //             layout: 'horizontal',
-      //             align: 'center',
-      //             verticalAlign: 'top',
-      //         },
-      //     credits: {
-      //         enabled: false
-      //         },
-      //     }); //end chart
-    } // end onMounted()
-
   } // end setup()
   // data : function() {
   //   return {
@@ -19396,10 +19392,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  id: "container"
+  ref: "el"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, null, 512
+  /* NEED_PATCH */
+  );
 }
 
 /***/ }),
@@ -37538,13 +37536,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _HelloWorld_vue_vue_type_template_id_1d11828b__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=template&id=1d11828b */ "./resources/js/components/HelloWorld.vue?vue&type=template&id=1d11828b");
 /* harmony import */ var _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=script&lang=js */ "./resources/js/components/HelloWorld.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_darrenh_laravel_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_darrenh_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_darrenh_laravel_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_HelloWorld_vue_vue_type_template_id_1d11828b__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/HelloWorld.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_darrenh_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_HelloWorld_vue_vue_type_template_id_1d11828b__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/HelloWorld.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -37566,13 +37564,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _StackedColumnWithPercentsAsDataLabelsChart_vue_vue_type_template_id_730d227d__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StackedColumnWithPercentsAsDataLabelsChart.vue?vue&type=template&id=730d227d */ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart.vue?vue&type=template&id=730d227d");
 /* harmony import */ var _StackedColumnWithPercentsAsDataLabelsChart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StackedColumnWithPercentsAsDataLabelsChart.vue?vue&type=script&lang=js */ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_darrenh_laravel_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_darrenh_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_darrenh_laravel_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_StackedColumnWithPercentsAsDataLabelsChart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_StackedColumnWithPercentsAsDataLabelsChart_vue_vue_type_template_id_730d227d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/StackedColumnWithPercentsAsDataLabelsChart.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_darrenh_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_StackedColumnWithPercentsAsDataLabelsChart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_StackedColumnWithPercentsAsDataLabelsChart_vue_vue_type_template_id_730d227d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/StackedColumnWithPercentsAsDataLabelsChart.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -37881,7 +37879,7 @@ function compileToFunction(template, options) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"C:\\\\Users\\\\darrenh\\\\laravel_code\\\\vue3_practice","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","/Users/darrenh/code/vue3_practice"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"/Users/darrenh/code/vue3_practice","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

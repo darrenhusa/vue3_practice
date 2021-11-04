@@ -12,7 +12,7 @@ export default {
     setup(props) {
         // greeting: 'Hello World from Vue 3!'
         const greeting = ref('Hello World from Vue 3!')
-        console.log('inside setup()....')
+        console.log('inside HelloWorld setup()....')
         // console.log(greeting.value)
         // console.log(props.greeting)
         // greeting = props
