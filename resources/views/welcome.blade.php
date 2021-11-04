@@ -43,6 +43,13 @@
             :chart-width="1200"
             :chart-height="400">
         ></stacked-column-with-data-label-percents>
+
+        <h2>Figure 4 - Test api route from web</h2>
+        <stacked-column-with-data-label-percents
+            :series='http://localhost:8000/fig04'
+            :chart-width="1200"
+            :chart-height="400">
+        ></stacked-column-with-data-label-percents>
     </div>
 
     <script src="js/app.js"></script>
