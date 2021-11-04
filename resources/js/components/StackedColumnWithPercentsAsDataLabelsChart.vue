@@ -107,7 +107,7 @@ export default {
             tooltip: {
                 formatter: function() {
                     return '<b>'+ this.x +'</b><br/>'+
-                        props.series.name +': '+ this.y +'<br/>'+
+                        this.series.name +': '+ this.y +'<br/>'+
                         'Total: '+ this.point.stackTotal;
                 }
             },

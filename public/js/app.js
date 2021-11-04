@@ -19291,7 +19291,7 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
         // },
         tooltip: {
           formatter: function formatter() {
-            return '<b>' + this.x + '</b><br/>' + props.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
+            return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
           }
         },
         plotOptions: {
