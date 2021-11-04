@@ -45,11 +45,11 @@
         ></stacked-column-with-data-label-percents>
 
         <h2>Figure 4 - Test api route from web</h2>
-        <stacked-column-with-data-label-percents
-            :series='http://localhost:8000/fig04'
+        <stacked-column-with-data-label-percents2
+            url='/api/fig04'
             :chart-width="1200"
             :chart-height="400">
-        ></stacked-column-with-data-label-percents>
+        ></stacked-column-with-data-label-percents2>
     </div>
 
     <script src="js/app.js"></script>

@@ -19333,6 +19333,189 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=script&lang=js":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=script&lang=js ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! highcharts */ "./node_modules/highcharts/highcharts.js");
+/* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(highcharts__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! highcharts/modules/exporting */ "./node_modules/highcharts/modules/exporting.js");
+/* harmony import */ var highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts__WEBPACK_IMPORTED_MODULE_0___default()));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "StackedColumnChartWithDataLabelPercents2",
+  props: {
+    url: {
+      type: String,
+      required: true
+    },
+    // series : {
+    //   // type: Array,
+    //   type: Object,
+    //   required: true
+    // },
+    chartWidth: {
+      type: Number,
+      "default": 300
+    },
+    chartHeight: {
+      type: Number,
+      "default": 300
+    }
+  },
+  // end props
+  setup: function setup(props) {
+    var el = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(null);
+    var styleObject = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)({
+      width: props.chartWidth + 'px',
+      height: props.chartHeight + 'px',
+      border: '1px solid gray'
+    }); // console.log(series)
+    // console.log(props.chartWidth)
+
+    console.log(props.url);
+    axios.get(props.url).then(function (response) {
+      console.log('outputing response values...'); // console.log(response);
+
+      console.log(response.data);
+      console.log(response.data['data']['length']);
+      console.log('---');
+      console.log(response.data['title']);
+      console.log(response.data['categories']);
+      console.log(response.data['data'][0].label);
+      console.log(response.data['data'][0].color);
+      console.log(response.data['data'][0].values);
+      var series = response.data;
+      var number = response.data['data']['length'];
+
+      for (var i = 0; i < number; i++) {
+        series.push({
+          name: response.data['data'][i].label,
+          data: response.data['data'][i].values,
+          color: response.data['data'][i].color // name: props.series.data[i].label,
+          // data: props.series.data[i].values,
+          // color: props.series.data[i].color
+
+        });
+      }
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_2__.onMounted)(function () {
+      // const seriesTemp = [];
+      // const number = props.series.data.length
+      console.log('inside onMounted function...'); // console.log(props.series)
+      // console.log(number)
+      // for(let i=0; i<number; i++){
+      //   seriesTemp.push({
+      //       name: props.series.data[i].label,
+      //       data: props.series.data[i].values,
+      //       color: props.series.data[i].color
+      //   });
+      // }
+
+      console.log(series);
+      var chartOptions = {
+        chart: {
+          type: 'column'
+        },
+        title: {
+          text: props.series.title
+        },
+        subtitle: {
+          text: props.series.subtitle
+        },
+        xAxis: {
+          title: {
+            text: props.series.x_axis
+          },
+          categories: props.series.categories
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: props.series.y_axis
+          },
+          stackLabels: {
+            enabled: true,
+            style: {
+              fontWeight: 'bold',
+              color: 'gray' //   color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+
+            }
+          }
+        },
+        // legend: {
+        //     align: 'right',
+        //     x: -70,
+        //     verticalAlign: 'top',
+        //     y: 20,
+        //     floating: true,
+        //     backgroundColor: 'white',
+        //   //   backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        //     borderColor: '#CCC',
+        //     borderWidth: 1,
+        //     shadow: false
+        // },
+        tooltip: {
+          formatter: function formatter() {
+            return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
+          }
+        },
+        plotOptions: {
+          column: {
+            stacking: 'normal',
+            dataLabels: {
+              enabled: true,
+              formatter: function formatter() {
+                return Math.round(100 * this.y / this.total) + '%';
+              },
+              color: 'white',
+              //   color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+              style: {
+                textShadow: '0 0 3px black, 0 0 3px black'
+              }
+            }
+          }
+        },
+        series: seriesTemp,
+        legend: {
+          enabled: true,
+          layout: 'horizontal',
+          align: 'center',
+          verticalAlign: 'top'
+        },
+        credits: {
+          enabled: false
+        }
+      }; // end chartOptions
+
+      highcharts__WEBPACK_IMPORTED_MODULE_0___default().chart(el.value, chartOptions); //end chart
+    }); // end onMounted()
+
+    return {
+      el: el,
+      styleObject: styleObject
+    }; // end return
+  } // end setup()  
+  // see https://stackoverflow.com/questions/50144557/how-to-add-data-to-chart-js-with-a-for-loop/50144700
+  //   beforeDestroy: function() {
+  //     this.target.destroy();
+  //   },
+
+}); // end export default
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/HelloWorld.vue?vue&type=template&id=1d11828b":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/HelloWorld.vue?vue&type=template&id=1d11828b ***!
@@ -19362,6 +19545,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart.vue?vue&type=template&id=730d227d ***!
   \****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    ref: "el",
+    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($setup.styleObject)
+  }, null, 4
+  /* STYLE */
+  );
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=template&id=22a252f6":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=template&id=22a252f6 ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37559,6 +37766,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StackedColumnWithPercentsAsDataLabelsChart2_vue_vue_type_template_id_22a252f6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=template&id=22a252f6 */ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=template&id=22a252f6");
+/* harmony import */ var _StackedColumnWithPercentsAsDataLabelsChart2_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=script&lang=js */ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=script&lang=js");
+/* harmony import */ var _Users_darrenh_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_Users_darrenh_code_vue3_practice_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_StackedColumnWithPercentsAsDataLabelsChart2_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_StackedColumnWithPercentsAsDataLabelsChart2_vue_vue_type_template_id_22a252f6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/HelloWorld.vue?vue&type=script&lang=js":
 /*!************************************************************************!*\
   !*** ./resources/js/components/HelloWorld.vue?vue&type=script&lang=js ***!
@@ -37591,6 +37826,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StackedColumnWithPercentsAsDataLabelsChart2_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StackedColumnWithPercentsAsDataLabelsChart2_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/HelloWorld.vue?vue&type=template&id=1d11828b":
 /*!******************************************************************************!*\
   !*** ./resources/js/components/HelloWorld.vue?vue&type=template&id=1d11828b ***!
@@ -37619,6 +37870,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StackedColumnWithPercentsAsDataLabelsChart_vue_vue_type_template_id_730d227d__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StackedColumnWithPercentsAsDataLabelsChart_vue_vue_type_template_id_730d227d__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StackedColumnWithPercentsAsDataLabelsChart.vue?vue&type=template&id=730d227d */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart.vue?vue&type=template&id=730d227d");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=template&id=22a252f6":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=template&id=22a252f6 ***!
+  \***************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StackedColumnWithPercentsAsDataLabelsChart2_vue_vue_type_template_id_22a252f6__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StackedColumnWithPercentsAsDataLabelsChart2_vue_vue_type_template_id_22a252f6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=template&id=22a252f6 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue?vue&type=template&id=22a252f6");
 
 
 /***/ }),
@@ -37966,7 +38233,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _components_HelloWorld_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/HelloWorld.vue */ "./resources/js/components/HelloWorld.vue");
 /* harmony import */ var _components_StackedColumnWithPercentsAsDataLabelsChart_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/StackedColumnWithPercentsAsDataLabelsChart.vue */ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart.vue");
+/* harmony import */ var _components_StackedColumnWithPercentsAsDataLabelsChart2_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/StackedColumnWithPercentsAsDataLabelsChart2.vue */ "./resources/js/components/StackedColumnWithPercentsAsDataLabelsChart2.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 
@@ -37974,7 +38243,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({}); // registers our HelloWorld component globally
 
 app.component('hello-world', _components_HelloWorld_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
-app.component('stacked-column-with-data-label-percents', _components_StackedColumnWithPercentsAsDataLabelsChart_vue__WEBPACK_IMPORTED_MODULE_2__["default"]); // mount the app to the DOM
+app.component('stacked-column-with-data-label-percents', _components_StackedColumnWithPercentsAsDataLabelsChart_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
+app.component('stacked-column-with-data-label-percents2', _components_StackedColumnWithPercentsAsDataLabelsChart2_vue__WEBPACK_IMPORTED_MODULE_3__["default"]); // mount the app to the DOM
 
 app.mount('#app');
 })();
