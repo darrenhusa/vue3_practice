@@ -19291,7 +19291,7 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
         // },
         tooltip: {
           formatter: function formatter() {
-            return '<b>' + props.x + '</b><br/>' + props.series.name + ': ' + props.y + '<br/>' + 'Total: ' + props.point.stackTotal;
+            return '<b>' + this.x + '</b><br/>' + props.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
           }
         },
         plotOptions: {
@@ -19300,7 +19300,7 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_1___default()((highcharts_
             dataLabels: {
               enabled: true,
               formatter: function formatter() {
-                return Math.round(100 * props.y / props.total) + '%';
+                return Math.round(100 * this.y / this.total) + '%';
               },
               color: 'white',
               //   color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
