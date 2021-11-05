@@ -12,7 +12,7 @@
 
     <div id="app">
 
-        <hello-world foo="Take me to your leader!"></hello-world>
+        <!-- <hello-world foo="Take me to your leader!"></hello-world> -->
 
         @php
     
@@ -45,11 +45,11 @@
         ></stacked-column-with-data-label-percents> -->
 
         <h2>Figure 4 - Test api route from web</h2>
-        <stacked-column-with-data-label-percents2
+        <stacked-column-with-data-label-percents3
             url='/api/fig04'
             :chart-width="1200"
             :chart-height="400">
-        ></stacked-column-with-data-label-percents2>
+        ></stacked-column-with-data-label-percents3>
     </div>
 
     <script src="js/app.js"></script>

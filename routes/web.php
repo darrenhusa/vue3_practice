@@ -25,6 +25,9 @@ Route::get('/api/fig04', function () {
 
     $series4 = [
         'title' => 'Number of Applications - TRAD Programs',
+        'subtitle' => '',
+        'x_axis' => '',
+        'y_axis' => '',
         'categories' => ['Fall 2017', 'Fall 2018', 'Fall 2019', 'Fall 2020', 'Fall 2021'],
         'data' => $data4,
     ];
